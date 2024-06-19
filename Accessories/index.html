@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Accessories</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="Main.css">
 </head>
 <body>
-    <h1>Car Accessories</h1>
+    <header>
+        <h1>Car Accessories</h1>
+    </header>
+
+<section>
  
     <form id="accessoryForm">
         <label for="accessory">Select an accessory:</label>
@@ -21,7 +27,9 @@
         <br>
         <button type="button" onclick="addToProductList()">Add</button>
     </form>
- 
+</section>
+
+<section>
     <h2>Product List</h2>
  
     <table id="productList">
@@ -31,10 +39,13 @@
             <th>Price</th>
         </tr>
     </table>
- 
+</section>
+
+<section>
     <p class="total">Net Price: $<span id="netPrice">0.00</span></p>
     <p class="total">VAT (7%): $<span id="vat">0.00</span></p>
     <p class="total">Gross Price: $<span id="grossPrice">0.00</span></p>
+</section>
 
     <script>
         function addToProductList() {
@@ -85,11 +96,15 @@
     </script>
 
     <footer>
-        <p> <li><a href="Homepage.html">Go to Home Page</a></li><br>
-            <li><a href="VAT.html">Go to VAT Page</a></li><br>
-            <li><a href="About.html">Go to About Me Page</a></li><br>
-        </p>
-        
+        <nav>
+            <ul>
+                <p> 
+                    <li><a href="Homepage.html">Go to Home Page</a></li><br>
+                    <li><a href="VAT.html">Go to VAT Page</a></li><br>
+                    <li><a href="About.html">Go to About Me Page</a></li><br>
+                </p>
+            </ul>
+        </nav>  
     </footer>
 </body>
 </html>
