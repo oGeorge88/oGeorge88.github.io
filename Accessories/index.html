@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Accessories</title>
     <link rel="stylesheet" type="text/css" href="Main.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -12,7 +13,6 @@
     </header>
 
 <section>
- 
     <form id="accessoryForm">
         <label for="accessory">Select an accessory:</label>
         <select id="accessory" name="accessory">
@@ -25,7 +25,7 @@
         <label for="amount">Amount:</label>
         <input type="number" id="amount" name="amount" min="1" value="1">
         <br>
-        <button type="button" onclick="addToProductList()">Add</button>
+        <button type="button" id="addButton">Add</button>
     </form>
 </section>
 
@@ -47,26 +47,23 @@
     <p class="total">Gross Price: $<span id="grossPrice">0.00</span></p>
 </section>
 
-    <script>
-        function addToProductList() {
-            var accessory = document.getElementById("accessory").value;
-            var accessoryName = document.getElementById("accessory").options[document.getElementById("accessory").selectedIndex].text;
-            var amount = parseInt(document.getElementById("amount").value);
+<script>
+    $(document).ready(function() {
+        $('#addButton').click(function() {
+            var accessory = $('#accessory').val();
+            var accessoryName = $('#accessory option:selected').text();
+            var amount = parseInt($('#amount').val());
             var price = calculatePrice(accessory) * amount;
- 
-            var table = document.getElementById("productList");
-            var row = table.insertRow(-1);
-            var accessoryCell = row.insertCell(0);
-            var amountCell = row.insertCell(1);
-            var priceCell = row.insertCell(2);
- 
-            accessoryCell.innerHTML = accessoryName;
-            amountCell.innerHTML = amount;
-            priceCell.innerHTML = "$" + price.toFixed(2);
- 
+            
+            var newRow = $('<tr>');
+            newRow.append('<td>' + accessoryName + '</td>');
+            newRow.append('<td>' + amount + '</td>');
+            newRow.append('<td>$' + price.toFixed(2) + '</td>');
+            $('#productList').append(newRow);
+            
             updatePrices(price);
-        }
- 
+        });
+
         function calculatePrice(accessory) {
             switch (accessory) {
                 case "p123":
@@ -81,30 +78,29 @@
                     return 0;
             }
         }
- 
+
         var totalPrice = 0;
         function updatePrices(price) {
             totalPrice += price;
             var netPrice = totalPrice;
             var vat = netPrice * 0.07;
             var grossPrice = netPrice + vat;
- 
-            document.getElementById("netPrice").innerHTML = netPrice.toFixed(2);
-            document.getElementById("vat").innerHTML = vat.toFixed(2);
-            document.getElementById("grossPrice").innerHTML = grossPrice.toFixed(2);
+            
+            $('#netPrice').text(netPrice.toFixed(2));
+            $('#vat').text(vat.toFixed(2));
+            $('#grossPrice').text(grossPrice.toFixed(2));
         }
-    </script>
+    });
+</script>
 
-    <footer>
-        <nav>
-            <ul>
-                <p> 
-                    <li><a href="Homepage.html">Go to Home Page</a></li><br>
-                    <li><a href="VAT.html">Go to VAT Page</a></li><br>
-                    <li><a href="About.html">Go to About Me Page</a></li><br>
-                </p>
-            </ul>
-        </nav>  
-    </footer>
+<footer>
+    <nav>
+        <ul>
+            <li><a href="Homepage.html">Go to Home Page</a></li><br>
+            <li><a href="VAT.html">Go to VAT Page</a></li><br>
+            <li><a href="About.html">Go to About Me Page</a></li><br>
+        </ul>
+    </nav>  
+</footer>
 </body>
 </html>
