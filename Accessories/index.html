@@ -228,21 +228,30 @@
 
     <script>
         $(document).ready(function() {
+            // Main form button click
             $('#addButton').click(function() {
-                var accessory = $('#accessory').val();
-                var accessoryName = $('#accessory option:selected').text();
-                var amount = parseInt($('#amount').val());
+                addProduct($('#accessory').val(), $('#accessory option:selected').text(), parseInt($('#amount').val()));
+            });
+
+            // Modal form button click
+            $('#addNewButton').click(function() {
+                addProduct($('#newAccessory').val(), $('#newAccessory option:selected').text(), parseInt($('#newAmount').val()));
+                $('#myModal').hide(); // Hide modal after adding the product
+            });
+
+            // Function to add product
+            function addProduct(accessory, accessoryName, amount) {
                 var price = calculatePrice(accessory) * amount;
                 
                 var newRow = $('<tr>');
                 newRow.append('<td>' + accessoryName + '</td>');
                 newRow.append('<td>' + amount + '</td>');
                 newRow.append('<td>$' + price.toFixed(2) + '</td>');
-                newRow.append('<td><button class="deleteButton"><i class="fas fa-trash-alt"></i> Delete</button></td>'); // Added "Delete" text for better visibility
+                newRow.append('<td><button class="deleteButton"><i class="fas fa-trash-alt"></i> Delete</button></td>');
                 $('#productList tbody').append(newRow);
                 
                 updatePrices(price);
-            });
+            }
 
             // Function to handle deletion of product rows
             $('#productList').on('click', '.deleteButton', function() {
@@ -255,24 +264,6 @@
             // Modal handling
             var modal = document.getElementById("myModal");
             var span = document.getElementsByClassName("close")[0];
-
-            $('#addNewButton').click(function() {
-                var accessory = $('#newAccessory').val();
-                var accessoryName = $('#newAccessory option:selected').text();
-                var amount = parseInt($('#newAmount').val());
-                var price = calculatePrice(accessory) * amount;
-                
-                var newRow = $('<tr>');
-                newRow.append('<td>' + accessoryName + '</td>');
-                newRow.append('<td>' + amount + '</td>');
-                newRow.append('<td>$' + price.toFixed(2) + '</td>');
-                newRow.append('<td><button class="deleteButton"><i class="fas fa-trash-alt"></i> Delete</button></td>'); // Added "Delete" text for better visibility
-                $('#productList tbody').append(newRow);
-                
-                updatePrices(price);
-
-                modal.style.display = "none"; // Hide the modal after adding
-            });
 
             // Open modal on click
             $('#accessoryForm').on('click', '#addButton', function() {
@@ -290,6 +281,7 @@
                 }
             }
 
+            // Function to calculate price
             function calculatePrice(accessory) {
                 switch (accessory) {
                     case "p123":
