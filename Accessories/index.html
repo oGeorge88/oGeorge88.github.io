@@ -16,7 +16,7 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            background-color: #f3f3f3;
+            background-color: #f3f3f3; /* Light gray background */
             margin: 0;
             padding: 0;
         }
@@ -35,7 +35,7 @@
         section {
             margin: 20px auto;
             max-width: 800px;
-            background-color: #fff;
+            background-color: #fff; /* White background */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -55,7 +55,7 @@
         }
 
         table th {
-            background-color: #f2f2f2;
+            background-color: #f2f2f2; /* Light gray header background */
         }
 
         .total {
@@ -73,12 +73,12 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black background */
             padding-top: 60px;
         }
 
         .modal-content {
-            background-color: #fefefe;
+            background-color: #f0f8ff; /* Light blue background */
             margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
@@ -136,7 +136,7 @@
 
         /* Button styling */
         button {
-            background-color: #333;
+            background-color: #4682b4; /* Steel blue */
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -146,7 +146,7 @@
         }
 
         button:hover {
-            background-color: #555;
+            background-color: #5f9ea0; /* Lighter steel blue on hover */
         }
 
         /* Input styling */
@@ -184,7 +184,7 @@
             <label for="amount">Amount:</label>
             <input type="number" id="amount" name="amount" min="1" value="1">
             <br>
-            <button type="button" id="addButton">Add</button>
+            <button type="button" id="openModalButton">Add</button> <!-- Changed to open modal -->
         </form>
     </section>
 
@@ -229,16 +229,16 @@
                 <label for="newAmount">Amount:</label>
                 <input type="number" id="newAmount" name="newAmount" min="1" value="1">
                 <br>
-                <button type="button" id="addNewButton">Add</button>
+                <button type="button" id="addNewButton">Add</button> <!-- Changed to add directly -->
             </form>
         </div>
     </div>
 
     <script>
         $(document).ready(function () {
-            // Main form button click
-            $('#addButton').click(function () {
-                addProduct($('#accessory').val(), $('#accessory option:selected').text(), parseInt($('#amount').val()));
+            // Open modal on button click
+            $('#openModalButton').click(function () {
+                $('#myModal').show();
             });
 
             // Modal form button click
@@ -272,11 +272,6 @@
             // Modal handling
             var modal = document.getElementById("myModal");
             var span = document.getElementsByClassName("close")[0];
-
-            // Open modal on click
-            $('#accessoryForm').on('click', '#addButton', function () {
-                modal.style.display = "block";
-            });
 
             // Close the modal when clicking on the close button or outside the modal
             span.onclick = function () {
